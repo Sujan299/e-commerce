@@ -1,7 +1,40 @@
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import plugins from './pluginsStore'
+import { ImCross } from "react-icons/im";
+
+
 export default function OurPlugins() {
+    const [cart, setCart] = useState({ 1: 0, 2: 0, 3: 0 })
+    const AddCart = (id) => {
+        return (
+            setCart({ ...cart, [id]: cart[id] + 1 })
+        )
+    }
+    const subFormCart = (id) => {
+        return (
+            setCart({ ...cart, [id]: cart[id] - 1 })
+        )
+    }
+    const removeCart = (id) => {
+        return (
+            setCart({ ...cart, [id]: 0 })
+        )
+    }
+    const totalAmount = () => {
+        let amount = 0;
+
+        for (const key in cart) {
+            if (cart[key] > 0) {
+                let productInfo = plugins.find(e => e.id === Number(key))
+                amount += Math.floor(cart[key] * productInfo.price)
+            }
+        }
+        return amount;
+    }
     return (
         <>
             <div className='flex flex-col gap-14 lg:px-40 md:px-20 px-7 py-40 bg-slate-100'>
@@ -10,7 +43,7 @@ export default function OurPlugins() {
                     <button className='font-semibold py-3 px-6 bg-white border border-indigo-500 hover:bg-indigo-500 transition duration-300 hover:text-white rounded-md'>View all plugins</button>
                 </div>
                 <div className='flex flex-wrap gap-y-12 justify-center items-center'>
-                {
+                    {
                         plugins.map((e) => {
                             return (
                                 <div key={e.id} className='flex flex-wrap flex-col justify-center text-center w-96 px-2'>
@@ -18,13 +51,35 @@ export default function OurPlugins() {
                                         <Image src={e.img} className='w-96 h-auto' />
                                         <h1 className='my-2 font-medium'>{e.name}</h1>
                                     </Link>
-                                    <p className='opacity-90'>{e.price}</p>
+                                    <p className='opacity-90'>${e.price}</p>
+                                    <button className='hover:bg-indigo-500 bg-indigo-400 bottom-8 w-32 m-auto rounded mt-3 p-x-8 py-2 text-white font-bold' onClick={() => { AddCart(e.id) }}>Add cart</button>
                                 </div>
                             )
                         })
                     }
                 </div>
+                <div className='flex gap-12 flex-wrap justify-center items-center'>
+                    {plugins.map((e) => {
+                        if (cart[e.id] > 0) {
+                            return <div className='flex flex-col w-32 justify-center items-center gap-2'>
+                                <div className='relative'>
+                                    <Image src={e.img} className='' />
+                                    <button onClick={() => { removeCart(e.id) }} className='absolute -right-2 -top-2 bg-red-500 p-2 rounded-full text-sm'><ImCross className=' text-white' /></button>
+                                </div>
+                                <div className='flex justify-between w-full'>
+                                    <p className='text-xs'>Quantity: {cart[e.id]}</p>
+                                    <p className='text-xs'>Price: ${e.price}</p>
+                                </div>
+                                <button onClick={() => { AddCart(e.id) }} className='font-bold text-green-400 hover:text-green-600 text-2xl'>+</button>
+                                <button onClick={() => { subFormCart(e.id) }} className='font-bold text-red-400 hover:text-red-600 text-2xl'>-</button>
+
+                            </div>
+                        }
+                    })}
+                </div>
+                <div className='flex justify-center items-center'><div className='font-bold'>Total price :</div> ${totalAmount()}</div>
             </div>
+
         </>
     )
 }

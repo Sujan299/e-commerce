@@ -18,16 +18,16 @@ export default function Navbar() {
                 <Link href='/'><h1 className='text-xl font-semibold' onClick={()=>{setClick(false)}}>WPVANTAGE</h1></Link>
                 <ul className='lg:flex gap-9 font-medium hidden'>
                     <li>
-                        <Link href='/themes' onClick={handleClick}>Themes</Link>
+                        <Link href='/themes'>Themes</Link>
                     </li>
                     <li>
-                        <Link href='/plugins' onClick={handleClick}>Plugins</Link>
+                        <Link href='/plugins'>Plugins</Link>
                     </li>
                     <li>
-                        <Link href='/about' onClick={handleClick}>About</Link>
+                        <Link href='/about'>About</Link>
                     </li>
                     <li>
-                        <Link href='/contact' onClick={handleClick}>Contact</Link>
+                        <Link href='/contact'>Contact</Link>
                     </li>
                 </ul>
                 <ul className='lg:flex hidden gap-10'>
@@ -36,7 +36,7 @@ export default function Navbar() {
                     </li>
                     <li>
                         <Link href='#' className='flex justify-center items-center gap-2 text-indigo-600 font-semibold'>
-                            <p>$29.0</p>
+                            <p>$00.0</p>
                             <BsBag></BsBag>
                         </Link>
                     </li>
