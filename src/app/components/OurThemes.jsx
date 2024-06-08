@@ -49,7 +49,7 @@ const OurThemes = () => {
                                         <Image src={e.img} className='w-96 h-auto' />
                                         <h1 className='my-2 font-medium'>{e.name}</h1>
                                     </Link>
-                                    <p className='opacity-90'>{e.price}</p>
+                                    <p className='opacity-90'>${e.price}</p>
                                     <button className='hover:bg-indigo-500 bg-indigo-400 bottom-8 w-32 m-auto rounded mt-3 p-x-8 py-2 text-white font-bold' onClick={() => { addCart(e.id) }}>Add cart</button>
 
                                 </div>

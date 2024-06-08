@@ -13,7 +13,7 @@ export default function Navbar() {
         }
     }
     return (
-        <>        <div className='lg:px-40 lg:py-6 py-3 md:px-20 px-7 bg-slate-100'>
+        <> <div className='lg:px-40 lg:py-6 py-3 md:px-20 px-7 bg-slate-100'>
             <nav className='flex justify-between lg:h-14 md:h-12 h-10 items-center'>
                 <Link href='/'><h1 className='text-xl font-semibold' onClick={()=>{setClick(false)}}>WPVANTAGE</h1></Link>
                 <ul className='lg:flex gap-9 font-medium hidden'>
@@ -32,7 +32,7 @@ export default function Navbar() {
                 </ul>
                 <ul className='lg:flex hidden gap-10'>
                     <li>
-                        <Link href='#' onClick={handleClick}>Sign In</Link>
+                        <Link href='#'>Sign In</Link>
                     </li>
                     <li>
                         <Link href='#' className='flex justify-center items-center gap-2 text-indigo-600 font-semibold'>
